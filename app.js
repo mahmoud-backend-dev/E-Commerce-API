@@ -40,7 +40,7 @@ app.use(NotFoundError);
 
 const start = async () => {
     try {
-        await connectDB(process.env.DB_URL);
+        await connectDB(process.env.DB_URI);
         app.listen(port, () => console.log(`Listen on http://localhost:${port}`));
     } catch (error) {
         console.log(error);
