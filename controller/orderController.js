@@ -141,7 +141,6 @@ exports.checkoutSession = asyncHandler(async (req, res, next) => {
         product_data: {
           name: req.user.name,
           description: 'Description Details',
-          // images:req.
         }
       },
       quantity: 1,

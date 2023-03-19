@@ -25,16 +25,19 @@ app.options('*', cors());
 // Compress all responses
 app.use(compression());
 
-// MiddleWare 
-app.use(express.json());
-app.use(express.static(path.join(__dirname, 'uploads')));
-
+// Checkout webhook
 app.post
 (
     '/webhook-checkout',
     express.raw({ type: 'application/json' }),
     webhookCheckout,
 )
+
+// MiddleWare 
+app.use(express.json());
+app.use(express.static(path.join(__dirname, 'uploads')));
+
+
 
 // mount Api
 mountRoutes(app);
