@@ -11,7 +11,7 @@ const port = process.env.PORT || 1812;
 
 // Routes
 const mountRoutes = require('./routes');
-
+const { webhookCheckout } = require('./controller/orderController');
 
 // Middlewares
 const errorHandlerMiddleWare = require('./middleware/error-handler');
@@ -28,6 +28,13 @@ app.use(compression());
 // MiddleWare 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'uploads')));
+
+app.post
+(
+    '/webhook-checkout',
+    express.raw({ type: 'application/json' }),
+    webhookCheckout,
+)
 
 // mount Api
 mountRoutes(app);
