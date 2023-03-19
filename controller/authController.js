@@ -7,7 +7,7 @@ const { BadRequest, UnauthenticatedError, NotFoundError, CustomErrorAPI } = requ
 const sendEmail = require('../utils/sendEmail'); 
 const createToken = require('../utils/createToken');
 const jwt = require('jsonwebtoken');
-
+const { sanitizeUser } = require('../utils/sanitizeData');
 
 const hashedResetCodeByCrypto = (resetCode) =>     crypto
 .createHash('sha256')
@@ -30,7 +30,7 @@ exports.signup = asyncHandler(async (req, res, next) => {
     // 2) Generate token 
     const token = createToken(user._id);
 
-    res.status(StatusCodes.CREATED).json({ data: user, token, });
+    res.status(StatusCodes.CREATED).json({ data: sanitizeUser(user), token, });
 }) 
 
 
