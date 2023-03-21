@@ -1,6 +1,8 @@
 const { check } = require('express-validator');
 const validatorMiddleWare = require('../../middleware/validatorMiddleware');
 const slugify = require('slugify');
+const Category = require('../../models/Category');
+const { BadRequest } = require('../../errors');
 
 exports.createCategoryValidator = [
     check('name').notEmpty().withMessage('Category required')
@@ -10,8 +12,14 @@ exports.createCategoryValidator = [
             req.body.slug = slugify(val);
             return true;
     }),
-    check('category').notEmpty().withMessage('Subcategory required')
-        .isMongoId().withMessage('Invalid category id format'),
+    check('category').notEmpty().withMessage('Category required')
+        .isMongoId().withMessage('Invalid category id format')
+        .custom(async (val) => {
+            const category = await Category.findById(val);
+            if (!category)
+                throw new BadRequest(`There is no such category with id: ${val}`)
+            return true;
+        }),
     validatorMiddleWare,
 ];
 
