@@ -30,6 +30,12 @@ exports.updateSubCategoryValidator = [
         .custom((val, { req }) => {
             req.body.slug = slugify(val);
             return true;
+        }),
+    check('category').custom(async (val) => {
+        const category = await Category.findById(val);
+        if (!category)
+            throw new BadRequest(`There is no such category with id: ${val}`)
+        return true;
     }),
     validatorMiddleWare,
 ];
