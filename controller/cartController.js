@@ -120,7 +120,7 @@ exports.clearCart = asyncHandler(async (req, res, next) => {
 // @access Private/User
 exports.updateCartItemQuantity = asyncHandler(async (req, res, next) => {
   const { _id } = req.user;
-  const { quantity } = req.body;
+  const {    } = req.body;
   const { itemId } = req.params;
   const cart = await Cart.findOne({ user: _id })
   if (!cart)

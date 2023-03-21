@@ -11,16 +11,30 @@ const {
 } = require('../controller/orderController');
 
 const {
+  createOrderValidator,
+  checkoutSessionValidator,
+} = require('../utils/validators/orderValidator');
+
+const {
   protect,
   allowedTo,
 } = require('../controller/authController');
 router.use(protect);
 
-router.get('/checkout-session/:cartId', allowedTo('user'), checkoutSession);
+router.post(
+  '/checkout-session/:cartId',
+  allowedTo('user'),
+  checkoutSessionValidator,
+  checkoutSession
+);
 
 router
   .route('/:cartId')
-  .post(allowedTo('user'), createCashOrder);
+  .post(
+    allowedTo('user'),
+    createOrderValidator,
+    createCashOrder,
+);
 
 router
   .get('/', allowedTo('admin', 'manager', 'user'), filterOrderForLoggedUser, getAllOrders);

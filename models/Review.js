@@ -4,6 +4,7 @@ const Product = require('./Product');
 const reviewSchema = new mongoose.Schema({
     title: {
         type: String,
+        required: true
     },
     ratings: {
         type: Number,

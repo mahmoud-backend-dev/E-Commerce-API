@@ -9,7 +9,9 @@ const rateLimit = require('express-rate-limit')
 const hpp = require('hpp');
 const mongoSanitize = require('express-mongo-sanitize');
 var xss = require('xss-clean')
-
+const swaggerUI = require('swagger-ui-express');
+const YAML = require('yamljs');
+const swaggerDocument = YAML.load('./swagger.yaml');
 const app = express();
 const port = process.env.PORT || 1812;
 
@@ -28,6 +30,12 @@ app.options('*', cors());
 
 // Compress all responses
 app.use(compression());
+
+
+// for Swagger Ui StartUp an running live server
+app.get('/', (req, res) => res.redirect('/api-docs'));
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+
 
 // Checkout webhook
 app.post

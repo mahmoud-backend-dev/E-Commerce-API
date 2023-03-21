@@ -45,7 +45,7 @@ exports.login = asyncHandler(async (req, res, next) => {
     // 2) Generate token 
     const token = createToken(user._id);
 
-    res.status(StatusCodes.OK).json({ data: user, token, });
+    res.status(StatusCodes.OK).json({ data: sanitizeUser(user), token, });
 });
 
 // @desc make sure the user is logged in
