@@ -1,5 +1,5 @@
 const Review = require('../models/Review');
-const asyncHandler = require('express-async-handler');
+
 const {
     createOne,
     getOne,
@@ -13,7 +13,7 @@ const {
 // Nested Route
 // POST api/v1/products/54546ad43sa8das5das/reviews
 exports.setProductIdAndUserIdToBody = (req, res, next) => {
-    if (!req.body.productId)
+    if (req.params.productId)
         req.body.product = req.params.productId;
     if (!req.body.user)
         req.body.user = req.user._id

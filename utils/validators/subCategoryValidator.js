@@ -5,14 +5,14 @@ const Category = require('../../models/Category');
 const { BadRequest } = require('../../errors');
 
 exports.createCategoryValidator = [
-    check('name').notEmpty().withMessage('Category required')
+    check('name').notEmpty().withMessage('Category name required')
         .isLength({ min: 2 }).withMessage('Too short category name ')
         .isLength({ max: 32 }).withMessage('Too long category name ')
         .custom((val, { req }) => {
             req.body.slug = slugify(val);
             return true;
     }),
-    check('category').notEmpty().withMessage('Category required')
+    check('category').notEmpty().withMessage('Category id required')
         .isMongoId().withMessage('Invalid category id format')
         .custom(async (val) => {
             const category = await Category.findById(val);

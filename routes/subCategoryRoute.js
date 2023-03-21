@@ -29,6 +29,10 @@ router.route('/')
         protect,
         allowedTo("manager","admin"),
         setCategoryIdToBody,
+        (req, res, next) => {
+            console.log("Ok");
+            next()
+        },
         createCategoryValidator,
         createSubCategory)
     .get(createFilterObject, getAllSubCategories);
