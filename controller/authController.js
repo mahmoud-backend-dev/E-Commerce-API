@@ -106,7 +106,6 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
     // Add expiration time for password reset code (10 min)
     user.passwordResetExpires = Date.now() + 10 * 60 * 1000;
     user.passwordResetVerified = false;
-
     await user.save();
     // 3) Send the reset code via email
     const message = `Hi ${user.name},
