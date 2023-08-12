@@ -14,6 +14,7 @@ authentication process to enable users to review all products, users are able to
 their carts and create both cash orders and online orders, The online payment gateway should be 
 integrate with our website such as stripe, allowing users to make payments using services such as 
 Vise, PayPal, or other similar platforms.
+
 APIs to build the backend for an e-commerce website with various features. The website includes 
 categories, subcategories, brands, reviews, Wishlist functionality, coupons, and a user 
 authentication process to enable users to review all products, users are able to add products to
